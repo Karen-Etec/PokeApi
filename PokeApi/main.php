@@ -1,18 +1,13 @@
 <?php
-if (isset($_POST["pokemon"])) {
-    $nome = strtolower(trim($_POST["pokemon"]));
-    $url = "https://pokeapi.co/api/v2/pokemon/$nome";
+if (isset($_GET["nome"])) {
+    $nome = strtolower(trim($_GET["nome"]));
 
-    $resposta = @file_get_contents($url);
-
-    if ($resposta !== false) {
-        $dados = json_decode($resposta, true);
-        $nomeFormatado = ucfirst($dados["name"]);
-        echo "<p style='color:green;'>Nome do Pokémon: $nomeFormatado</p>";
+    if (@file_get_contents("https://pokeapi.co/api/v2/pokemon/$nome")) {
+        echo "Buscou por: $nome";
     } else {
-        echo "<p style='color:red;'>Pokémon não encontrado.</p>";
+        echo "O nome '$nome' não existe";
     }
 } else {
-    echo "<p>Nenhum dado enviado.</p>";
+    echo "Nenhum nome enviado";
 }
 ?>
