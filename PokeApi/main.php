@@ -1,7 +1,6 @@
 <?php
 if (isset($_POST["pokemon"])) {
     $nome = strtolower(trim($_POST["pokemon"]));
-    // trim: remove espaços do input
     $url = "https://pokeapi.co/api/v2/pokemon/$nome";
 
     $resposta = @file_get_contents($url);
